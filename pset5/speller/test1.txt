@@ -1,0 +1,19 @@
+
+MISSPELLED WORDS
+
+A
+cat
+is
+not
+a
+caterpillar
+
+WORDS MISSPELLED:     6
+WORDS IN DICTIONARY:  143091
+WORDS IN TEXT:        6
+TIME IN load:         0.03
+TIME IN check:        0.01
+TIME IN size:         0.00
+TIME IN unload:       0.00
+TIME IN TOTAL:        0.04
+
