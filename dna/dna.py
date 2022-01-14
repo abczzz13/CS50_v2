@@ -3,42 +3,44 @@ import sys
 
 
 def main():
-
     # TODO: Check for command-line usage
     # Ensure correct usage
     if len(sys.argv) != 3:
         sys.exit("Usage: python dna.py FILENAME.csv FILENAME.txt")
 
     # TODO: Read database file into a variable
+    # Reading the str database file into the lists headers[] and data[]
     with open(sys.argv[1], "r") as file_csv:
-        database = csv.DictReader(file_csv)
-        str_db = list(database.fieldnames)
-        str_db.remove("name")
-        #
         reader = csv.reader(file_csv)
-        # headers = next(reader)
+        headers = next(reader)
+        headers.remove("name")
         data = list(reader)
-    # print(data)
 
     # TODO: Read DNA sequence file into a variable
+    # Reading the sequence file with the .read() method and storing into the sequence variable
     with open(sys.argv[2], "r") as file_txt:
         sequence = file_txt.read()
 
     # TODO: Find longest match of each STR in DNA sequence
-    results = []  # {}
-    for str in str_db:
+    # Generating the count of every str with the longest_match function into the results[] list
+    results = []
+    for str in headers:
         results.append(longest_match(sequence, str))
-        #results[str] = longest_match(sequence, str)
-    # print(results)
 
     # TODO: Check database for matching profiles
+    # Iterating over every row in the data and then iterating over every cell in the row to
+    # see if it matches the results[] list. If all cells match set output to this person.
+    output = "No match"
     for row in data:
         count = 0
         for i in range(1, len(row)):
             if int(row[i]) == results[i-1]:
                 count += 1
             if count == len(row) - 1:
-                print(row[0])
+                output = row[0]
+
+    # Create output
+    print(output)
     return
 
 
