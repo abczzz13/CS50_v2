@@ -9,11 +9,10 @@ def main():
         sys.exit("Usage: python dna.py FILENAME.csv FILENAME.txt")
 
     # TODO: Read database file into a variable
-    # Reading the str database file into the lists headers[] and data[]
+    # Reading the str database file into the headers[] list and data{} dict
     with open(sys.argv[1], "r") as file_csv:
-        reader = csv.reader(file_csv)
-        headers = next(reader)
-        headers.remove("name")
+        reader = csv.DictReader(file_csv)
+        headers = list(reader.fieldnames)
         data = list(reader)
 
     # TODO: Read DNA sequence file into a variable
@@ -34,10 +33,10 @@ def main():
     for row in data:
         count = 0
         for i in range(1, len(row)):
-            if int(row[i]) == results[i-1]:
+            if int(row[headers[i]]) == results[i]:
                 count += 1
             if count == len(row) - 1:
-                output = row[0]
+                output = row[headers[0]]
 
     # Create output
     print(output)
