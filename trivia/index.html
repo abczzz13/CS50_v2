@@ -22,11 +22,12 @@
                 <!-- TODO: Add multiple choice question here -->
                 <h3>What's the question?</h3>
                 <form id="q1">
-                    <button type="radio" name="q1" id="yes" value="yes"><label for="yes">Yes</label>
-                    <button type="radio" name="q1" id="no" value="no"><label for="no">No</label>
-                    <button type="radio" name="q1" id="question" value="question"><label for="question">There is no question</label>
-                    <button type="radio" name="q1" id="what" value="what"><label for="what">What?</label>
+                    <button type="radio" name="q1" class="q1" id="yes" value="yes"><label for="yes">Yes</label></button>
+                    <button type="radio" name="q1" class="q1" id="no" value="no"><label for="no">No</label></button>
+                    <button type="radio" name="q1" class="q1" id="question" value="question"><label for="question">There is no question</label></button>
+                    <button type="radio" name="q1" class="q1" id="what" value="what"><label for="what">What?</label></button>
                 </form>
+                <h3 id="q1Text"></h3>
 
 
             </div>
@@ -37,8 +38,10 @@
                 <!-- TODO: Add free response question here -->
                 <h3>What's the question?</h3>
                 <form>
-                    <input type="text" id="q2" name="q2" value="..." class="q2">
+                    <input type="text" id="q2" name="q2" value="" class="q2">
                     <button type="submit" name="submit" value="submit" class="submit">Submit</button>
+                </form>
+                <h3 id="q2Text"></h3>
             </div>
         </div>
         <script src="script-0.0.1.js" defer></script>
