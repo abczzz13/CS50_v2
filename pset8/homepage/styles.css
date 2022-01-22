@@ -1,0 +1,23 @@
+h1 {
+    font-size: 250%;
+}
+
+.bar {
+    height: 6.3rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.logo {
+    width: 5rem;
+    height: 5rem;
+    background: radial-gradient(red, blue);
+    border-radius: 50%;
+    margin: 0.65rem;
+}
+
+.title {
+    height: 6.3rem;
+    /*padding: 1.5rem 0;*/
+    display: flex;
+    align-items: center;
