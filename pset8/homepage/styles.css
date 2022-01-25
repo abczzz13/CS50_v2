@@ -1,5 +1,51 @@
+header {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: 0.5px solid lightgrey;
+}
+
+footer {
+    background: #f38470;
+    position: relative;
+    bottom: -2.2rem;
+    min-height: 5rem;
+}
+
+nav,
+.bar {
+    margin: 0 10vw;
+}
+
+footer > article {
+    margin: 2vw 10vw;
+    padding: 2vw 0;
+}
+
 h1 {
     font-size: 250%;
+}
+
+h1 > a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.main-section {
+    display: grid;
+    grid-template-columns: 80vw;
+    grid-template-rows: repeat(3, 10vw);
+    justify-content: center;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .bar {
@@ -21,3 +67,9 @@ h1 {
     /*padding: 1.5rem 0;*/
     display: flex;
     align-items: center;
+}
+
+#mountains {
+    width: 100vw;
+    height: 25rem;
+}
