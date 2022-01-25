@@ -1,9 +1,44 @@
 :root {
-    --color-primary: tomato;
-    --color-secondary: gold;
-    --color-accent: blue;
-    --color-headings: black;
-    --color-body: lightgrey;
+    --color-primary: #1e9adf;
+    --color-secondary: #ffc102;
+    --color-accent: #063852;
+    --color-headings: rgb(41, 36, 36);
+    --color-body: rgb(133, 124, 124);
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 2.4rem;
+    line-height: 1.5;
+    color: var(--color-body);
+}
+
+h1,
+h2,
+h3 {
+    font-family: "Inter", sans-serif;
+    color: var(--color-headings);
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+p {
+    margin-top: 0;
 }
 
 header {
@@ -26,10 +61,6 @@ nav,
 footer > article {
     margin: 2vw 10vw;
     padding: 2vw 0;
-}
-
-h1 {
-    font-size: 250%;
 }
 
 h1 > a {
@@ -80,4 +111,18 @@ a:hover {
 #mountains {
     width: 100vw;
     height: 25rem;
+}
+
+@media screen and (min-width: 1024px) {
+    h1 {
+        font-size: 5rem;
+    }
+
+    h2 {
+        font-size: 4rem;
+    }
+
+    h3 {
+        font-size: 3rem;
+    }
 }
