@@ -44,15 +44,15 @@ const buttons = document.querySelectorAll('.q1')
 const q1Text = document.querySelector('#q1Text');
 
 buttons.forEach((btn) => {
-  btn.addEventListener("click", (event) => {
-    if(btn.value === 'question') {
-        btn.style.backgroundColor = 'green';
-        q1Text.textContent = 'Correct!';
-    } else {
-        btn.style.backgroundColor = 'red';
-        q1Text.textContent = 'Incorrect!';
-    }
-  });
+    btn.addEventListener("click", (event) => {
+        if (btn.value === 'question') {
+            btn.style.backgroundColor = 'green';
+            q1Text.textContent = 'Correct!';
+        } else {
+            btn.style.backgroundColor = 'red';
+            q1Text.textContent = 'Incorrect!';
+        }
+    });
 });
 
 
@@ -68,12 +68,11 @@ const q2Text = document.querySelector('#q2Text');
 document.querySelector('.submit').addEventListener('click', function () {
     if (answer.value === 'There is no question') {
         field.style.backgroundColor = 'green';
-        q1Text.textContent = 'Correct!';
+        q2Text.textContent = 'Correct!';
     } else {
         field.style.backgroundColor = 'red';
         q2Text.textContent = 'Incorrect!';
     }
-    document.body.appendChild(para);
 });
 
 
