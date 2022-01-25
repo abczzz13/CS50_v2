@@ -1,4 +1,4 @@
-/* Color Palette*/
+/* Global Variables */
 
 :root {
     --color-primary: #1e9adf;
@@ -157,6 +157,7 @@ a {
 
 .btn--primary:hover {
     background: #38b9ff;
+    color: white;
 }
 
 .btn--secondary {
@@ -166,6 +167,7 @@ a {
 
 .btn--secondary:hover {
     background: #ffd451;
+    color: white;
 }
 
 .btn--outline {
@@ -187,6 +189,29 @@ a {
 
 @media screen and (min-width: 1024px) {
     .btn {
+        font-size: 1.75rem;
+    }
+}
+
+/* Input */
+
+.input {
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    color: var(--color-headings);
+    line-height: 1.5;
+    margin: 1rem 0;
+    outline: 0;
+    padding: 1.5rem 3.5rem;
+    font-size: 2rem;
+}
+
+::placeholder {
+    color: rgb(133, 124, 124);
+}
+
+@media screen and (min-width: 1024px) {
+    .input {
         font-size: 1.75rem;
     }
 }
