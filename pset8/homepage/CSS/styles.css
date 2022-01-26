@@ -109,6 +109,7 @@ a {
     padding: 0.5rem 2rem;
     font-weight: bold;
     white-space: nowrap;
+    margin-right: 1rem;
 }
 
 .badge--primary {
@@ -118,6 +119,11 @@ a {
 
 .badge--secondary {
     background: var(--color-secondary);
+    color: white;
+}
+
+.badge--accent {
+    background: var(--color-accent);
     color: white;
 }
 
@@ -131,6 +137,10 @@ a {
 
 .list--inline .list__item {
     display: inline-block;
+    margin-right: 2rem;
+}
+
+.list--tick .list__item {
     margin-right: 2rem;
 }
 
@@ -216,9 +226,58 @@ a {
     }
 }
 
+/* Cards */
+
+.card {
+    border-radius: 7px;
+    box-shadow: 0 0 20px 10px #f3f3f3;
+    overflow: hidden;
+    border: 0;
+}
+
+.card__header,
+.card__body {
+    padding: 2rem 3rem;
+}
+
+.card--primary .card__header {
+    background: var(--color-primary);
+    color: white;
+}
+
+.card--secondary .card__header {
+    background: var(--color-secondary);
+    color: white;
+}
+
+/* Plan */
+.plan__profile {
+    display: inline-flex;
+}
+
+.plan__name {
+    color: white;
+    margin: 0;
+    font-weight: 300;
+    font-size: 2rem;
+}
+
+.plan__profile-info {
+    margin-left: 2rem;
+}
+
+.plan__profile-pic {
+    width: 60px;
+    height: 60px;
+}
+.plan__quote {
+    padding: 0;
+    margin: 0;
+}
+
 /* */
 
-header {
+.old-header {
     background-color: rgba(255, 255, 255, 0.95);
     border-bottom: 0.5px solid lightgrey;
 }
