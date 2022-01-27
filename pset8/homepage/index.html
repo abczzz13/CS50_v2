@@ -24,196 +24,242 @@
             crossorigin="anonymous"
         ></script>
         <script src="script-0.0.1.js" defer></script>
+        <script
+            src="https://kit.fontawesome.com/10198c25bd.js"
+            crossorigin="anonymous"
+        ></script>
     </head>
     <body>
-        <header class="sticky-top old-header">
-            <div class="bar">
-                <div class="logo"></div>
-                <div class="title">
-                    <h1><a href="index.html">The Project Institute</a></h1>
+        <header class="sticky-top">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#"
+                        ><img class="logo" src="media/79747.webp" alt=""
+                    /></a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarScroll"
+                        aria-controls="navbarScroll"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+                        <ul class="navbar-nav navbar-nav-scroll">
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link active"
+                                    aria-current="page"
+                                    href="index.html"
+                                    >Home</a
+                                >
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="projects.html"
+                                    id="navbarScrollingDropdown"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    Projects
+                                </a>
+                                <ul
+                                    class="dropdown-menu"
+                                    aria-labelledby="navbarScrollingDropdown"
+                                >
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="projects.html#project_1"
+                                            >Project #1</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="projects.html#project_2"
+                                            >Project #2</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="projects.html#project_3"
+                                            >Project #3</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about.html">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html"
+                                    >Contact</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <nav>
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a
-                            class="nav-link active"
-                            aria-current="page"
-                            href="index.html"
-                            >Home</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="projects.html">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                </ul>
             </nav>
         </header>
         <main>
-            <img
-                id="mountains"
-                src="Media/mountains_v1.jpg"
-                alt="Image of a view on mountains"
-            />
-            <section class="main-section">
-                <section class="centered">
-                    <h2>Welcome to our website!</h2>
-                    <p>Where we can show you all of our projects...</p>
-                </section>
-                <article>
-                    <h3>Project #1</h3>
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Perferendis tenetur nostrum qui assumenda ratione
-                        officiis, cumque quibusdam amet eos sint atque dolor,
-                        debitis, ex totam repellendus harum iste quasi
-                        consequatur rem! Quisquam dolorum harum voluptatum modi
-                        ipsam qui saepe corporis consectetur, consequuntur unde
-                        deleniti ratione autem, praesentium eos eaque explicabo
-                        non reprehenderit impedit quas perferendis. Dignissimos,
-                        exercitationem nisi vero est aperiam perspiciatis
-                        possimus. Aperiam quas voluptas beatae laudantium
-                        molestias quia iusto ipsam delectus tempora veniam.
-                        Saepe dignissimos eaque aspernatur laudantium, facere
-                        nihil. Facilis id quis earum nesciunt quisquam
-                        perferendis corporis necessitatibus! Provident sapiente
-                        in dolor cum iusto earum iure maxime?
-                    </p>
-                    <a href="#" class="link-arrow">Learn more</a>
-                    <span class="badge badge--primary">New!</span>
-                    <span class="badge badge--secondary">Old!</span>
-                    <ul class="list list--inline">
-                        <li class="list__item">Item 1</li>
-                        <li class="list__item">Item 2</li>
-                        <li class="list__item">Item 3</li>
-                    </ul>
-                    <button class="btn btn--block btn--primary">
-                        Click here
-                    </button>
-                    <a href="#" class="btn btn--outline">Buy now</a>
-                    <input
-                        type="text"
-                        class="input"
-                        placeholder="There's a question here"
-                    />
-                    <div style="width: 40%; padding: 2rem">
-                        <div class="plan">
-                            <div class="card card--primary">
-                                <header class="card__header plan__header">
-                                    <div class="plan__profile">
-                                        <img
-                                            class="plan__profile-pic"
-                                            src="project files/79747.png"
-                                            alt=""
-                                        />
-                                        <div class="plan__profile-info">
-                                            <h3 class="plan__name">
-                                                Thomas de Jong
-                                            </h3>
-                                            <span class="badge badge--secondary"
-                                                >CEO</span
-                                            >
-                                            <span class="badge badge--accent"
-                                                >CS50</span
-                                            >
-                                        </div>
+            <section class="block block--dark block--skewed">
+                <div class="grid grid--cols-2">
+                    <div class="banner__content">
+                        <h1>Welcome on our website!</h1>
+                        <p>Where we can show you all of our projects...</p>
+                        <a
+                            href="projects.html"
+                            class="btn btn--secondary btn--block"
+                            >Find out more</a
+                        >
+                    </div>
+                    <img class="banner__image" src="media/79747.png" alt="" />
+                </div>
+            </section>
+            <section>
+                <a href="#" class="link-arrow">Learn more</a>
+                <span class="badge badge--primary">New!</span>
+                <span class="badge badge--secondary">Old!</span>
+                <ul class="list list--inline">
+                    <li class="list__item">Item 1</li>
+                    <li class="list__item">Item 2</li>
+                    <li class="list__item">Item 3</li>
+                </ul>
+                <button class="btn btn--block btn--primary">Click here</button>
+                <a href="#" class="btn btn--outline">Buy now</a>
+                <input
+                    type="text"
+                    class="input"
+                    placeholder="There's a question here"
+                />
+                <div style="width: 40%; padding: 2rem">
+                    <div class="plan">
+                        <div class="card card--primary">
+                            <header class="card__header plan__header">
+                                <div class="plan__profile">
+                                    <img
+                                        class="plan__profile-pic"
+                                        src="media/79747.png"
+                                        alt=""
+                                    />
+                                    <div class="plan__profile-info">
+                                        <h3 class="plan__name">
+                                            Thomas de Jong
+                                        </h3>
+                                        <span class="badge badge--secondary"
+                                            >CEO</span
+                                        >
+                                        <span class="badge badge--accent"
+                                            >CS50</span
+                                        >
                                     </div>
-                                    <blockquote class="plan__quote">
-                                        <p class="plan__quote-text">
-                                            He's no thief of his own wallet
-                                        </p>
-                                    </blockquote>
-                                </header>
-                                <div class="card__body">
-                                    <ul class="list list--tick">
-                                        <li class="list__item">Item 1</li>
-                                        <li class="list__item">Item 2</li>
-                                        <li class="list__item">Item 3</li>
-                                    </ul>
                                 </div>
+                                <blockquote class="plan__quote">
+                                    <p class="plan__quote-text">
+                                        He's no thief of his own wallet
+                                    </p>
+                                </blockquote>
+                            </header>
+                            <div class="card__body">
+                                <ul class="list list--tick">
+                                    <li class="list__item">Item 1</li>
+                                    <li class="list__item">Item 2</li>
+                                    <li class="list__item">Item 3</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="grid grid--cols-3">
-                        <div style="height: 100px; background: gold"></div>
-                        <div
-                            style="height: 100px; background: dodgerblue"
-                        ></div>
-                        <div style="height: 100px; background: tomato"></div>
+                </div>
+                <div class="grid grid--cols-3">
+                    <div style="height: 100px; background: gold"></div>
+                    <div style="height: 100px; background: dodgerblue"></div>
+                    <div style="height: 100px; background: tomato"></div>
+                </div>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Saepe totam eaque pariatur enim blanditiis, a quos ea
+                    architecto atque aut voluptatem ullam corrupti velit dolorem
+                    dignissimos nobis, minima nemo voluptas.
+                </p>
+            </section>
+            <section class="callout callout__footer callout--primary">
+                <div class="grid grid--cols-2">
+                    <div class="callout__content">
+                        <h2 class="callout__header">
+                            Do you want to know more?
+                        </h2>
+                        <p>
+                            Do you want to know more about our projects or do
+                            you have any questions?
+                        </p>
                     </div>
-                    <div class="callout callout--primary">
-                        <div class="grid grid--cols-2">
-                            <div class="callout__content">
-                                <h2 class="callout__header">
-                                    Ready to get started?
-                                </h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Culpa magnam voluptatem,
-                                    facere beatae nulla eum impedit doloremque
-                                    quod accusamus quo!
-                                </p>
-                            </div>
-                            <a href="#" class="btn btn--secondary btn--stretch"
-                                >Get started</a
-                            >
-                        </div>
-                    </div>
-                </article>
-                <article>
-                    <h3>Project #2</h3>
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Perferendis tenetur nostrum qui assumenda ratione
-                        officiis, cumque quibusdam amet eos sint atque dolor,
-                        debitis, ex totam repellendus harum iste quasi
-                        consequatur rem! Quisquam dolorum harum voluptatum modi
-                        ipsam qui saepe corporis consectetur, consequuntur unde
-                        deleniti ratione autem, praesentium eos eaque explicabo
-                        non reprehenderit impedit quas perferendis. Dignissimos,
-                        exercitationem nisi vero est aperiam perspiciatis
-                        possimus. Aperiam quas voluptas beatae laudantium
-                        molestias quia iusto ipsam delectus tempora veniam.
-                        Saepe dignissimos eaque aspernatur laudantium, facere
-                        nihil. Facilis id quis earum nesciunt quisquam
-                        perferendis corporis necessitatibus! Provident sapiente
-                        in dolor cum iusto earum iure maxime?
-                    </p>
-                </article>
-                <article>
-                    <h3>Project #3</h3>
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Perferendis tenetur nostrum qui assumenda ratione
-                        officiis, cumque quibusdam amet eos sint atque dolor,
-                        debitis, ex totam repellendus harum iste quasi
-                        consequatur rem! Quisquam dolorum harum voluptatum modi
-                        ipsam qui saepe corporis consectetur, consequuntur unde
-                        deleniti ratione autem, praesentium eos eaque explicabo
-                        non reprehenderit impedit quas perferendis. Dignissimos,
-                        exercitationem nisi vero est aperiam perspiciatis
-                        possimus. Aperiam quas voluptas beatae laudantium
-                        molestias quia iusto ipsam delectus tempora veniam.
-                        Saepe dignissimos eaque aspernatur laudantium, facere
-                        nihil. Facilis id quis earum nesciunt quisquam
-                        perferendis corporis necessitatibus! Provident sapiente
-                        in dolor cum iusto earum iure maxime?
-                    </p>
-                </article>
+                    <a
+                        href="contact.html"
+                        class="btn btn--secondary btn--stretch"
+                        >Contact us!</a
+                    >
+                </div>
             </section>
         </main>
-        <footer class="footer">
-            <article>
-                <p>
-                    Website Copyright &#169; Thomas de Jong for the CS50 course.
-                </p>
-            </article>
+        <footer class="footer__fp">
+            <div class="footer__container">
+                <div class="grid grid--cols-4">
+                    <div class="footer__content">
+                        <h2 class="footer__heading">Projects</h2>
+                        <ul class="list list--tick">
+                            <li class="list__item">
+                                <a href="projects.html#project_1">Project #1</a>
+                            </li>
+                            <li class="list__item">
+                                <a href="projects.html#project_2">Project #2</a>
+                            </li>
+                            <li class="list__item">
+                                <a href="projects.html#project_3">Project #3</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer__content">
+                        <h2 class="footer__heading">Sitemap</h2>
+                        <ul class="list list--tick">
+                            <li class="list__item">
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="list__item">
+                                <a href="projects.html">Projects</a>
+                            </li>
+                            <li class="list__item">
+                                <a href="about.html">About</a>
+                            </li>
+                            <li class="list__item">
+                                <a href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer__content">
+                        <h2 class="footer__heading">The Project Institute</h2>
+                        <ul class="list list--tick">
+                            <li class="list__item">Science Park 610</li>
+                            <li class="list__item">1098XH Amsterdam</li>
+                            <li class="list__item">The Netherlands</li>
+                        </ul>
+                    </div>
+                    <div class="footer__content">
+                        <h2 class="footer__heading">Made possibe by:</h2>
+                        <ul class="list list--tick">
+                            <li class="list__item">Coding with Mosh</li>
+                            <li class="list__item">Bootstrap</li>
+                            <li class="list__item">Font Awesome</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </footer>
     </body>
 </html>
