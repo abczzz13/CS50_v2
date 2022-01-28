@@ -24,7 +24,7 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"
         ></script>
-        <script src="script-0.0.1.js" defer></script>
+        <script src="script.js" defer></script>
         <script
             src="https://kit.fontawesome.com/10198c25bd.js"
             crossorigin="anonymous"
@@ -34,7 +34,7 @@
         <header class="sticky-top">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#"
+                    <a class="navbar-brand" href="index.html"
                         ><img
                             class="logo"
                             src="media/79747.webp"
@@ -117,7 +117,7 @@
             <h1 class="header__title">Contact</h1>
         </section>
             <div class="grid grid--cols-2">
-                <article>
+                <article class="contact__container">
                     <h2>Contact information</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit saepe modi nihil alias neque! Voluptas culpa a provident saepe consectetur explicabo perspiciatis labore nisi delectus at excepturi, vitae laborum obcaecati.</p>
                     <ul>
@@ -126,7 +126,7 @@
                     </ul>
                     
                 </article>
-                <div>
+                <div class="contact__container">
                     <H2>Contact form</H2>
                     <form action="" class="form__container">
                         <input
@@ -135,6 +135,8 @@
                                 name="name"
                                 class="input"
                                 placeholder="Name"
+                                minlength="3" 
+                                maxlength="255"
                             />
                         <input
                             type="email"
@@ -142,6 +144,8 @@
                             name="email"
                             class="input"
                             placeholder="E-mail"
+                            minlength="5" 
+                            maxlength="255"
                         />
                         <input
                             type="text"
@@ -149,8 +153,11 @@
                             name="subject"
                             class="input"
                             placeholder="Subject"
+                            minlength="3" 
+                            maxlength="255"
                         />
-                        <textarea id="msg" name="user_message" class="input"placeholder="Your message"></textarea>
+                        <textarea id="message" name="user_message" class="input"placeholder="Your message" minlength="3" 
+                        maxlength="2000"></textarea>
                         <button class="btn btn--outline">Contact us!</button>
                     </form>
                 </div>
@@ -211,5 +218,5 @@
         </footer>
     </body>
 
-    <script src="script-0.0.1.js" defer></script>
+    <script src="script.js" defer></script>
 </html>
