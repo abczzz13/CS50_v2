@@ -79,7 +79,8 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute("SELECT * FROM users WHERE username = ?",
+                          request.form.get("username"))
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
@@ -117,7 +118,30 @@ def quote():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    return apology("TODO")
+    if request.method == "POST":
+
+        # Process the input
+        username = request.form.get("username")
+        password = generate_password_hash(request.form.get("password"))
+        confirmation = request.form.get("confirmation")
+        # To hash confirmation or not?
+
+        # Validate the input
+        if not username or not password or not confirmation:
+            return apology("TODO")
+
+        if not check_password_hash(password, confirmation):
+            return apology("TODO")
+
+        # check to see if username already exists in DB
+        db.execute(" ")
+
+        # Insert into the DB
+        db.execute("INSERT INTO users (username, hash) VALUES (?, ?)",
+                   username, password)
+        return redirect("/")
+    else:
+        return render_template("register.html")
 
 
 @app.route("/sell", methods=["GET", "POST"])
