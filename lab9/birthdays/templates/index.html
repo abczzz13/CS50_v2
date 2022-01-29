@@ -15,6 +15,12 @@
 
                 <h2>Add a Birthday</h2>
                 <!-- TODO: Create a form for users to submit a name, a month, and a day -->
+                <form action="/" method="post">
+                    <input type="text" name="name" placeholder="Name">
+                    <input type="text" name="month" placeholder="Month">
+                    <input type="text" name="day" placeholder="Day">
+                    <input type="submit" value="Add birthday">
+                </form>
             </div>
 
             <div class="section">
@@ -25,10 +31,23 @@
                         <tr>
                             <th>Name</th>
                             <th>Birthday</th>
+                            <th>Remove</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- TODO: Loop through the database entries to display them in this table -->
+                        {% for entry in entries %}
+                            <tr>
+                                <td>{{ entry["name"] }}</td>
+                                <td>{{ entry["month"] }}/{{ entry["day"] }}</td>
+                                <td>
+                                    <form action="/remove" method="post">
+                                        <input name="id" type="hidden" value="{{ entry.id }}">
+                                        <input type="submit" value="Remove">
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
