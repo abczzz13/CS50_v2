@@ -50,17 +50,64 @@ def index():
 @login_required
 def buy():
     """Buy shares of stock"""
-    return apology("TODO")
+    if request.method == "POST":
+
+        # Get variables
+        symbol = request.form.get("symbol")
+        shares = request.form.get("shares")
+
+        # Ensure symbol was submitted
+        if not symbol:
+            return apology("must provide symbol", 403)
+
+        # Ensure shares was submitted
+        if not shares:
+            return apology("must provide amount of shares", 403)
+
+        # Ensure positive amount of shares was submitted
+        shares_int = int(shares)
+
+        if shares_int <= 0:
+            return apology("must provide a positive amount of shares", 403)
+
+        # Ensure the symbol exists
+        stock = lookup(request.form.get("symbol"))
+
+        if stock == None:
+            return apology("stock doesn't exist", 403)
+
+        # Ensure the user has enough cash to make the purchase
+        amount = shares_int * stock["price"]
+
+        row = db.execute("SELECT CASH FROM users WHERE id = ?",
+                         session["user_id"])
+        cash = row[0]["cash"]
+        if cash < amount:
+            return apology("you do not have enough money to buy these shares", 403)
+
+        # Process transaction into transactions database
+        db.execute("INSERT INTO transactions (symbol, shares, price, user_id) VALUES (?, ?, ?, ?)",
+                   symbol, shares_int, stock["price"], session["user_id"])
+
+        # Update cash field in users database
+        cash_after = cash - amount
+        db.execute("UPDATE users SET cash = ? WHERE id = ?",
+                   cash_after, session["user_id"])
+
+        return redirect("/buy")
+
+    else:
+        return render_template("buy.html")
 
 
-@app.route("/history")
-@login_required
+@ app.route("/history")
+@ login_required
 def history():
     """Show history of transactions"""
     return apology("TODO")
 
 
-@app.route("/login", methods=["GET", "POST"])
+@ app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
 
@@ -97,7 +144,7 @@ def login():
         return render_template("login.html")
 
 
-@app.route("/logout")
+@ app.route("/logout")
 def logout():
     """Log user out"""
 
@@ -108,14 +155,25 @@ def logout():
     return redirect("/")
 
 
-@app.route("/quote", methods=["GET", "POST"])
-@login_required
+@ app.route("/quote", methods=["GET", "POST"])
+@ login_required
 def quote():
     """Get stock quote."""
-    return apology("TODO")
+    if request.method == "POST":
+        # Using the lookup function to lookup the stock
+        stock = lookup(request.form.get("stock"))
+
+        # Check if stock has been found
+        if stock == None:
+            return apology("stock doesn't exist", 403)
+
+        # Return the stock information
+        return render_template("quoted.html", name=stock["name"], price=stock["price"], symbol=stock["symbol"])
+    else:
+        return render_template("quote.html")
 
 
-@app.route("/register", methods=["GET", "POST"])
+@ app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
     if request.method == "POST":
@@ -154,8 +212,8 @@ def register():
         return render_template("register.html")
 
 
-@app.route("/sell", methods=["GET", "POST"])
-@login_required
+@ app.route("/sell", methods=["GET", "POST"])
+@ login_required
 def sell():
     """Sell shares of stock"""
     return apology("TODO")
