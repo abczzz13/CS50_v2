@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+	<table class="table table-sm">
+		<thead>
+			<tr>
+				<th scope="col">Stock</th>
+				<th scope="col">Shares</th>
+				<th scope="col">Stockprice</th>
+				<th scope="col">Total Value</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for transaction in transactions %}
+			<tr scope="row">
+				<td>{{ transaction["symbol"] }}</td>
+				<td>{{ transaction["shares"] }}</td>
+				<td>{{ transaction["price"] }}</td>
+				<td>{{ transaction["transaction_total"] }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+
+
+	<table class="table table-sm">
+		<thead>
+			<tr>
+				<th scope="col">Current Balance</th>
+				<th scope="col">Total Value of all Stocks</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr scope="row">
+				<td>{{ cash }}</td>
+				<td>{{ total }}</td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}

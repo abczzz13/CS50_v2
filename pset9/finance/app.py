@@ -43,11 +43,26 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    return apology("TODO")
+    # Query all transactions for the user
+    transactions = db.execute("SELECT symbol, shares, price, ROUND((shares * price), 2) AS transaction_total FROM transactions WHERE user_id = ?",
+                              session["user_id"])
+
+    # Lookup current prices
+    total = 0
+    for transaction in transactions:
+        transaction["price"] = lookup(transaction["symbol"])["price"]
+        total += (transaction["price"] * transaction["shares"])
+
+    # Query for the amount of cash of the user
+    cash = db.execute("SELECT cash FROM users WHERE id = ?",
+                      session["user_id"])
+
+    return render_template("index.html", transactions=transactions, total=round(total, 2), cash=round(cash[0]["cash"], 2))
+    # TODO: include the name of the stock in the table aswell
 
 
-@app.route("/buy", methods=["GET", "POST"])
-@login_required
+@ app.route("/buy", methods=["GET", "POST"])
+@ login_required
 def buy():
     """Buy shares of stock"""
     if request.method == "POST":
@@ -79,7 +94,7 @@ def buy():
         # Ensure the user has enough cash to make the purchase
         amount = shares_int * stock["price"]
 
-        row = db.execute("SELECT CASH FROM users WHERE id = ?",
+        row = db.execute("SELECT cash FROM users WHERE id = ?",
                          session["user_id"])
         cash = row[0]["cash"]
         if cash < amount:
@@ -94,7 +109,7 @@ def buy():
         db.execute("UPDATE users SET cash = ? WHERE id = ?",
                    cash_after, session["user_id"])
 
-        return redirect("/buy")
+        return redirect("/")
 
     else:
         return render_template("buy.html")
@@ -171,6 +186,8 @@ def quote():
         return render_template("quoted.html", name=stock["name"], price=stock["price"], symbol=stock["symbol"])
     else:
         return render_template("quote.html")
+
+    # TODO: include a buy button to the quoted overview
 
 
 @ app.route("/register", methods=["GET", "POST"])
