@@ -178,7 +178,7 @@ def quote():
     """Get stock quote."""
     if request.method == "POST":
         # Using the lookup function to lookup the stock
-        stock = lookup(request.form.get("stock"))
+        stock = lookup(request.form.get("symbol"))
 
         # Check if stock has been found
         if stock == None:
@@ -235,4 +235,51 @@ def register():
 @ login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+
+    # Query information for the user
+    transactions = db.execute("SELECT symbol AS symbol, SUM(shares) AS shares, price, SUM(shares * price) AS stock_total FROM transactions WHERE user_id = ? GROUP BY symbol",
+                              session["user_id"])
+
+    if request.method == "POST":
+
+        # Ensure stock was selected
+        stock = request.form.get("stock")
+        if not stock:
+            return apology("no stock was selected", 403)
+
+        # Ensure shares was submitted
+        shares = request.form.get("shares")
+        if not shares:
+            return apology("must provide amount of shares", 403)
+
+        # Ensure positive amount of shares was submitted
+        shares_int = int(shares)
+        if shares_int <= 0:
+            return apology("must provide a positive amount of shares", 403)
+
+        # Ensure user has the amount of shares
+        stock_number = db.execute("SELECT SUM(shares) AS shares FROM transactions WHERE user_id = ? AND symbol = ? GROUP BY symbol",
+                                  session["user_id"], stock)
+        stock_number_int = int(stock_number[0]["shares"])
+        if stock_number_int < shares_int:
+            return apology("not enough shares", 403)
+
+        # Process everything in the transactions DB
+        current_price = lookup(stock)["price"]
+        db.execute("INSERT INTO transactions (symbol, shares, price, user_id) VALUES (?, ?, ?, ?)",
+                   stock, -shares_int, current_price, session["user_id"])
+
+        # Update cash field in users database
+        cash = db.execute(
+            "SELECT cash FROM users WHERE id = ?", session["user_id"])
+        cash_after = cash[0]["cash"] - (current_price * shares_int)
+        db.execute("UPDATE users SET cash = ? WHERE id = ?",
+                   cash_after, session["user_id"])
+
+        return redirect("/")
+
+    else:
+        return render_template("sell.html", transactions=transactions)
+
+    # TODO: Add Stock name to DB
+    # TODO: Style the sell.html
