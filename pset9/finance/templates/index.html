@@ -8,19 +8,21 @@
 	<table class="table table-sm">
 		<thead>
 			<tr>
-				<th scope="col">Stock</th>
+				<th scope="col">Stock Symbol</th>
+				<th scope="col">Stock Name</th>
 				<th scope="col">Shares</th>
-				<th scope="col">Stockprice</th>
-				<th scope="col">Total Value</th>
+				<th scope="col">Current Stockprice</th>
+				<th scope="col">Total Stock Value</th>
 			</tr>
 		</thead>
 		<tbody>
 		{% for transaction in transactions %}
 			<tr scope="row">
 				<td>{{ transaction["symbol"] }}</td>
+				<td>{{ transaction["name"] }}</td>
 				<td>{{ transaction["shares"] }}</td>
-				<td>{{ transaction["price"] }}</td>
-				<td>{{ transaction["transaction_total"] }}</td>
+				<td>{{ transaction["price"] | usd }}</td>
+				<td>{{ transaction["stock_total"] | usd }}</td>
 			</tr>
 		{% endfor %}
 		</tbody>
@@ -36,8 +38,8 @@
 		</thead>
 		<tbody>
 			<tr scope="row">
-				<td>{{ cash }}</td>
-				<td>{{ total }}</td>
+				<td>{{ cash | usd }}</td>
+				<td>{{ total | usd }}</td>
 			</tr>
 		</tbody>
 	</table>

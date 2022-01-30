@@ -44,20 +44,22 @@ def after_request(response):
 def index():
     """Show portfolio of stocks"""
     # Query all transactions for the user
-    transactions = db.execute("SELECT symbol, shares, price, ROUND((shares * price), 2) AS transaction_total FROM transactions WHERE user_id = ?",
+    transactions = db.execute("SELECT symbol AS symbol, SUM(shares) AS shares, price, SUM(shares * price) AS stock_total FROM transactions WHERE user_id = ? GROUP BY symbol",
                               session["user_id"])
 
     # Lookup current prices
     total = 0
     for transaction in transactions:
         transaction["price"] = lookup(transaction["symbol"])["price"]
+        # Maybe included the name in the DB?
+        transaction["name"] = lookup(transaction["symbol"])["name"]
         total += (transaction["price"] * transaction["shares"])
 
     # Query for the amount of cash of the user
     cash = db.execute("SELECT cash FROM users WHERE id = ?",
                       session["user_id"])
 
-    return render_template("index.html", transactions=transactions, total=round(total, 2), cash=round(cash[0]["cash"], 2))
+    return render_template("index.html", transactions=transactions, total=total, cash=cash[0]["cash"])
     # TODO: include the name of the stock in the table aswell
 
 
