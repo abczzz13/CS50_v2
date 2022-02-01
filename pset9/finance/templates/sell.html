@@ -7,19 +7,19 @@
 {% block main %}
 	<form action="/sell" method="post">
 			<div class="mb-3">
-				<select name="stock" id="stock-select">
-					<option value="">--Please choose an option--</option>
+				<select name="symbol" id="stock-select">
+					<option name="symbol" value="">--Please choose an option--</option>
 					{% for transaction in transactions %}
 						{% if symbol == transaction.symbol %}
-					<option value="{{ transaction.symbol }}" selected>{{ transaction.name }} ({{ transaction.symbol }})</option>
+					<option name="symbol" value="{{ transaction.symbol }}" selected>{{ transaction.name }} ({{ transaction.symbol }})</option>
 						{% else %}
-					<option value="{{ transaction.symbol }}">{{ transaction.name }} ({{ transaction.symbol }})</option>
+					<option name="symbol" value="{{ transaction.symbol }}">{{ transaction.name }} ({{ transaction.symbol }})</option>
 						{% endif %}
 					{% endfor %}
 				</select>
 			</div>
 		<div class="mb-3">
-			<input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Shares" type="text">
+			<input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Shares" type="number" min="1" step="1">
 		</div>
 		<button class="btn btn-primary" type="submit">Sell</button>
 	</form>

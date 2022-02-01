@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+	<table class="table table-sm">
+		<thead>
+			<tr>
+				<th scope="col">Datetime bought</th>
+				<th scope="col">Stock Symbol</th>
+				<th scope="col">Stock Name</th>
+				<th scope="col">Type</th>
+				<th scope="col">Shares</th>
+				<th scope="col">Stockprice</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for transaction in transactions %}
+			<tr scope="row">
+				<td>{{ transaction.date_time }}</td>
+				<td>{{ transaction.symbol }}</td>
+				<td>{{ transaction.name }}</td>
+				<td>{% if transaction.shares >= 0 %}Bought{% else %}Sold{% endif %}</td>
+				<td>{{ transaction.shares }}</td>
+				<td>{{ transaction.price | usd }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

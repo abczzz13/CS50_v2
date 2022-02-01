@@ -12,7 +12,7 @@
 			<input autocomplete="off" class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="{{ symbol }}" type="text" value="{{ symbol }}">
 		</div>
 		<div class="mb-3">
-			<input autocomplete="off" class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Shares" type="text" autofocus>
+			<input autocomplete="off" class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Shares" type="number" min="1" step="1" autofocus>
 		</div>
 
 		{% else %}
@@ -20,7 +20,7 @@
 			<input autocomplete="off" class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="Symbol" type="text" autofocus>
 		</div>
 		<div class="mb-3">
-			<input autocomplete="off" class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Shares" type="text">
+			<input autocomplete="off" class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Shares" type="number" min="1" step="1">
 		</div>
 
 		{% endif %}

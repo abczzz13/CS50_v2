@@ -92,21 +92,24 @@ def buy():
 
         # Ensure symbol was submitted
         if not symbol:
-            return apology("must provide symbol", 403)
+            return apology("must provide symbol", 400)
 
         # Ensure shares was submitted
         if not shares:
-            return apology("must provide amount of shares", 403)
+            return apology("must provide amount of shares", 400)
+
+        # Ensure whole shares are submitted
+        if not shares.isdigit():
+            return apology("must provide whole number of shares", 400)
 
         # Ensure positive amount of shares was submitted
         if int(shares) <= 0:
-            return apology("must provide a positive amount of shares", 403)
+            return apology("must provide a positive amount of shares", 400)
 
-        # Ensure the symbol exists
         stock = lookup(request.form.get("symbol"))
 
         if stock == None:
-            return apology("stock doesn't exist", 403)
+            return apology("stock doesn't exist", 400)
 
         # Ensure the user has enough cash to make the purchase
         amount = int(shares) * stock["price"]
@@ -115,7 +118,7 @@ def buy():
                          session["user_id"])
         cash = row[0]["cash"]
         if cash < amount:
-            return apology("you do not have enough money to buy these shares", 403)
+            return apology("you do not have enough money to buy these shares", 400)
 
         # Process transaction into transactions database
         db.execute("INSERT INTO transactions (symbol, shares, price, name, user_id) VALUES (?, ?, ?, ?, ?)",
@@ -136,7 +139,10 @@ def buy():
 @ login_required
 def history():
     """Show history of transactions"""
-    return apology("TODO")
+    # Query all transactions for the user
+    transactions = db.execute(
+        "SELECT * FROM transactions WHERE user_id = ? ORDER BY date_time", session["user_id"])
+    return render_template("history.html", transactions=transactions)
 
 
 @ app.route("/login", methods=["GET", "POST"])
@@ -151,11 +157,11 @@ def login():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 403)
+            return apology("must provide username", 400)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 403)
+            return apology("must provide password", 400)
 
         # Query database for username
         rows = db.execute("SELECT * FROM users WHERE username = ?",
@@ -163,7 +169,7 @@ def login():
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return apology("invalid username and/or password", 403)
+            return apology("invalid username and/or password", 400)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
@@ -192,12 +198,18 @@ def logout():
 def quote():
     """Get stock quote."""
     if request.method == "POST":
+
+        # Check if symbol has been provided
+        symbol = request.form.get("symbol")
+        if not symbol:
+            return apology("no symbol provided", 400)
+
         # Using the lookup function to lookup the stock
-        stock = lookup(request.form.get("symbol"))
+        stock = lookup(symbol)
 
         # Check if stock has been found
         if stock == None:
-            return apology("stock doesn't exist", 403)
+            return apology("stock doesn't exist", 400)
 
         # Return the stock information
         return render_template("quoted.html", name=stock["name"], price=stock["price"], symbol=stock["symbol"])
@@ -240,15 +252,15 @@ def register():
 
         # Ensure username was submitted
         if not username:
-            return apology("must provide username", 403)
+            return apology("must provide username", 400)
 
         # Ensure password was submitted
         if not password:
-            return apology("must provide password", 403)
+            return apology("must provide password", 400)
 
         # Ensure confirmation was submitted
         if not confirmation:
-            return apology("must provide password confirmation", 403)
+            return apology("must provide password confirmation", 400)
 
         # Ensure the confirmation matches the password
         if not check_password_hash(password, confirmation):
@@ -256,7 +268,7 @@ def register():
 
         # check to see if username already exists in DB
         if len(db.execute("SELECT username FROM users WHERE username = ?", request.form.get("username"))) != 0:
-            return apology("username already exists", 403)
+            return apology("username already exists", 400)
 
         # Insert into the DB
         db.execute("INSERT INTO users (username, hash) VALUES (?, ?)",
@@ -279,36 +291,40 @@ def sell():
     if request.method == "POST":
 
         # Ensure stock was selected
-        stock = request.form.get("stock")
+        stock = request.form.get("symbol")
         if not stock:
-            return apology("no stock was selected", 403)
+            return apology("no stock was selected", 400)
 
         # Ensure shares was submitted
         shares = request.form.get("shares")
         if not shares:
-            return apology("must provide amount of shares", 403)
+            return apology("must provide amount of shares", 400)
+
+        # Ensure whole shares are submitted
+        if not shares.isdigit():
+            return apology("must provide whole number of shares", 400)
 
         # Ensure positive amount of shares was submitted
-        shares_int = int(shares)
-        if shares_int <= 0:
-            return apology("must provide a positive amount of shares", 403)
+        if int(shares) <= 0:
+            return apology("must provide a positive amount of shares", 400)
 
         # Ensure user has the amount of shares
         stock_number = db.execute("SELECT SUM(shares) AS shares FROM transactions WHERE user_id = ? AND symbol = ? GROUP BY symbol",
                                   session["user_id"], stock)
         stock_number_int = int(stock_number[0]["shares"])
-        if stock_number_int < shares_int:
-            return apology("not enough shares", 403)
+        if stock_number_int < int(shares):
+            return apology("not enough shares", 400)
 
         # Process everything in the transactions DB
         current_price = lookup(stock)["price"]
-        db.execute("INSERT INTO transactions (symbol, shares, price, user_id) VALUES (?, ?, ?, ?)",
-                   stock, -shares_int, current_price, session["user_id"])
+        name = lookup(stock)["name"]
+        db.execute("INSERT INTO transactions (symbol, name, shares, price, user_id) VALUES (?, ?, ?, ?, ?)",
+                   stock, name, -int(shares), current_price, session["user_id"])
 
         # Update cash field in users database
         cash = db.execute(
             "SELECT cash FROM users WHERE id = ?", session["user_id"])
-        cash_after = cash[0]["cash"] + (current_price * shares_int)
+        cash_after = cash[0]["cash"] + (current_price * int(shares))
         db.execute("UPDATE users SET cash = ? WHERE id = ?",
                    cash_after, session["user_id"])
 
