@@ -8,16 +8,20 @@
 	<table class="table table-sm">
 		<thead>
 			<tr>
+				<th scope="col">Symbol</th>
 				<th scope="col">Name</th>
 				<th scope="col">Price</th>
-				<th scope="col">Symbol</th>
+				<th scope="col">Buy</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr scope="row">
-				<td>{{ name }}</td>
-				<td>{{ price }}</td>
 				<td>{{ symbol }}</td>
+				<td>{{ name }}</td>
+				<td>{{ price | usd }}</td>
+				<td>
+					<form action="/quoted" method="post" name="buy"><input type="text" name="symbol" value="{{ symbol }}" hidden><input id="buy" type="submit" name="type" value="Buy"></form> <form action="/quoted" method="post" name="sell"><input type="text" name="symbol" value="{{ symbol }}" hidden><input id="sell" type="submit" name="type" value="Sell"></form>
+				</td>
 			</tr>
 		</tbody>
 	</table>

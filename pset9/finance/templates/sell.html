@@ -10,7 +10,11 @@
 				<select name="stock" id="stock-select">
 					<option value="">--Please choose an option--</option>
 					{% for transaction in transactions %}
-					<option value="{{ transaction.symbol }}">{{ transaction.name }}</option>
+						{% if symbol == transaction.symbol %}
+					<option value="{{ transaction.symbol }}" selected>{{ transaction.name }} ({{ transaction.symbol }})</option>
+						{% else %}
+					<option value="{{ transaction.symbol }}">{{ transaction.name }} ({{ transaction.symbol }})</option>
+						{% endif %}
 					{% endfor %}
 				</select>
 			</div>

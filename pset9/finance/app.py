@@ -1,7 +1,7 @@
 import os
 
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -39,28 +39,45 @@ def after_request(response):
     return response
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
     """Show portfolio of stocks"""
-    # Query all transactions for the user
-    transactions = db.execute("SELECT symbol AS symbol, SUM(shares) AS shares, price, SUM(shares * price) AS stock_total FROM transactions WHERE user_id = ? GROUP BY symbol",
-                              session["user_id"])
+    # Process the buy/sell requests on POST:
+    if request.method == "POST":
 
-    # Lookup current prices
-    total = 0
-    for transaction in transactions:
-        transaction["price"] = lookup(transaction["symbol"])["price"]
-        # Maybe included the name in the DB?
-        transaction["name"] = lookup(transaction["symbol"])["name"]
-        total += (transaction["price"] * transaction["shares"])
+        # Send the request to the appropriate place when buying
+        symbol = request.form.get("symbol")
+        if request.form.get("type") == "Buy":
+            return render_template("buy.html", symbol=symbol)
 
-    # Query for the amount of cash of the user
-    cash = db.execute("SELECT cash FROM users WHERE id = ?",
-                      session["user_id"])
+        # Send the request to the appropriate place when selling
+        elif request.form.get("type") == "Sell":
+            # also query the transactions to fill up the dropdown selector
+            transactions = db.execute("SELECT symbol AS symbol, name AS name, SUM(shares) AS shares, price, SUM(shares * price) AS stock_total FROM transactions WHERE user_id = ? GROUP BY symbol",
+                                      session["user_id"])
+            return render_template("sell.html", transactions=transactions, symbol=symbol)
+        else:
+            redirect("/")
 
-    return render_template("index.html", transactions=transactions, total=total, cash=cash[0]["cash"])
-    # TODO: include the name of the stock in the table aswell
+    # Show the overview with a GET request
+    else:
+
+        # Query all transactions for the user
+        transactions = db.execute("SELECT symbol AS symbol, name AS name, SUM(shares) AS shares, price, SUM(shares * price) AS stock_total FROM transactions WHERE user_id = ? GROUP BY symbol",
+                                  session["user_id"])
+
+        # Lookup current prices
+        total = 0
+        for transaction in transactions:
+            transaction["price"] = lookup(transaction["symbol"])["price"]
+            total += (transaction["price"] * transaction["shares"])
+
+        # Query for the amount of cash of the user
+        cash = db.execute("SELECT cash FROM users WHERE id = ?",
+                          session["user_id"])
+
+        return render_template("index.html", transactions=transactions, total=total, cash=cash[0]["cash"])
 
 
 @ app.route("/buy", methods=["GET", "POST"])
@@ -82,9 +99,7 @@ def buy():
             return apology("must provide amount of shares", 403)
 
         # Ensure positive amount of shares was submitted
-        shares_int = int(shares)
-
-        if shares_int <= 0:
+        if int(shares) <= 0:
             return apology("must provide a positive amount of shares", 403)
 
         # Ensure the symbol exists
@@ -94,7 +109,7 @@ def buy():
             return apology("stock doesn't exist", 403)
 
         # Ensure the user has enough cash to make the purchase
-        amount = shares_int * stock["price"]
+        amount = int(shares) * stock["price"]
 
         row = db.execute("SELECT cash FROM users WHERE id = ?",
                          session["user_id"])
@@ -103,8 +118,8 @@ def buy():
             return apology("you do not have enough money to buy these shares", 403)
 
         # Process transaction into transactions database
-        db.execute("INSERT INTO transactions (symbol, shares, price, user_id) VALUES (?, ?, ?, ?)",
-                   symbol, shares_int, stock["price"], session["user_id"])
+        db.execute("INSERT INTO transactions (symbol, shares, price, name, user_id) VALUES (?, ?, ?, ?, ?)",
+                   symbol, int(shares), stock["price"], stock["name"], session["user_id"],)
 
         # Update cash field in users database
         cash_after = cash - amount
@@ -114,7 +129,7 @@ def buy():
         return redirect("/")
 
     else:
-        return render_template("buy.html")
+        return render_template("buy.html", symbol=None)
 
 
 @ app.route("/history")
@@ -189,7 +204,28 @@ def quote():
     else:
         return render_template("quote.html")
 
-    # TODO: include a buy button to the quoted overview
+
+@ app.route("/quoted", methods=["POST"])
+@ login_required
+def quoted():
+    """Include a buy button from the quoted page"""
+
+    # Process the buy/sell requests on POST:
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+
+        # Send the request to the appropriate place when buying
+        if request.form.get("type") == "Buy":
+            return render_template("buy.html", symbol=symbol)
+
+        # Send the request to the appropriate place when selling
+        elif request.form.get("type") == "Sell":
+            # also query the transactions to fill up the dropdown selector
+            transactions = db.execute("SELECT symbol AS symbol, name AS name, SUM(shares) AS shares, price, SUM(shares * price) AS stock_total FROM transactions WHERE user_id = ? GROUP BY symbol",
+                                      session["user_id"])
+            return render_template("sell.html", transactions=transactions, symbol=symbol)
+    else:
+        return redirect("/quote")
 
 
 @ app.route("/register", methods=["GET", "POST"])
@@ -237,7 +273,7 @@ def sell():
     """Sell shares of stock"""
 
     # Query information for the user
-    transactions = db.execute("SELECT symbol AS symbol, SUM(shares) AS shares, price, SUM(shares * price) AS stock_total FROM transactions WHERE user_id = ? GROUP BY symbol",
+    transactions = db.execute("SELECT symbol AS symbol, name AS name, SUM(shares) AS shares, price, SUM(shares * price) AS stock_total FROM transactions WHERE user_id = ? GROUP BY symbol",
                               session["user_id"])
 
     if request.method == "POST":
@@ -272,14 +308,15 @@ def sell():
         # Update cash field in users database
         cash = db.execute(
             "SELECT cash FROM users WHERE id = ?", session["user_id"])
-        cash_after = cash[0]["cash"] - (current_price * shares_int)
+        cash_after = cash[0]["cash"] + (current_price * shares_int)
         db.execute("UPDATE users SET cash = ? WHERE id = ?",
                    cash_after, session["user_id"])
 
         return redirect("/")
 
     else:
-        return render_template("sell.html", transactions=transactions)
+        return render_template("sell.html", transactions=transactions, symbol=None)
 
-    # TODO: Add Stock name to DB
+    # TODO: implement the functionL url_for()
     # TODO: Style the sell.html
+    # TODO: change autofocus to dropdown menu when going to sell.html from main menu

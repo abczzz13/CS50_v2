@@ -13,17 +13,21 @@
 				<th scope="col">Shares</th>
 				<th scope="col">Current Stockprice</th>
 				<th scope="col">Total Stock Value</th>
+				<th scope="col">Buy or Sell</th>
 			</tr>
 		</thead>
 		<tbody>
 		{% for transaction in transactions %}
-			<tr scope="row">
-				<td>{{ transaction["symbol"] }}</td>
-				<td>{{ transaction["name"] }}</td>
-				<td>{{ transaction["shares"] }}</td>
-				<td>{{ transaction["price"] | usd }}</td>
-				<td>{{ transaction["stock_total"] | usd }}</td>
-			</tr>
+			{% if transaction.shares > 0 %}
+				<tr scope="row">
+					<td>{{ transaction["symbol"] }}</td>
+					<td>{{ transaction["name"] }}</td>
+					<td>{{ transaction["shares"] }}</td>
+					<td>{{ transaction["price"] | usd }}</td>
+					<td>{{ transaction["stock_total"] | usd }}</td>
+					<td><form action="/" method="post" name="buy"><input type="text" name="symbol" value="{{ transaction.symbol }}" hidden><input id="buy" type="submit" name="type" value="Buy"></form> <form action="/" method="post" name="sell"><input type="text" name="symbol" value="{{ transaction.symbol }}" hidden><input id="buy" type="submit" name="type" value="Sell"></form></td>
+				</tr>
+			{% endif %}
 		{% endfor %}
 		</tbody>
 	</table>
