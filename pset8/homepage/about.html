@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My Webpage</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Ubuntu&display=swap"
+            rel="stylesheet"
+        />
+        <link href="css/normalize.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+        <script src="script.js" defer></script>
+        <script
+            src="https://kit.fontawesome.com/10198c25bd.js"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <body>
+        <header class="sticky-top">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="index.html"
+                        ><img class="logo" src="media/79747.webp" alt=""
+                    /></a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarScroll"
+                        aria-controls="navbarScroll"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+                        <ul class="navbar-nav navbar-nav-scroll">
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    aria-current="page"
+                                    href="index.html"
+                                    >Home</a
+                                >
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="projects.html"
+                                    id="navbarScrollingDropdown"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    Projects
+                                </a>
+                                <ul
+                                    class="dropdown-menu"
+                                    aria-labelledby="navbarScrollingDropdown"
+                                >
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="projects.html#project_1"
+                                            >Project #1</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="projects.html#project_2"
+                                            >Project #2</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="projects.html#project_3"
+                                            >Project #3</a
+                                        >
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link nav-link active"
+                                    href="about.html"
+                                    >About</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html"
+                                    >Contact</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <header>
+                <img class="header__bar" src="media/79747.png" alt="" />
+                <h1 class="header__title">About</h1>
+            </header>
+            <section class="about">
+                <h2 class="about__header">Introducing our staff members:</h2>
+                <div class="grid grid--cols-3">
+                    <div class="plan">
+                        <div class="card card--primary">
+                            <header class="card__header plan__header">
+                                <div class="plan__profile">
+                                    <img
+                                        class="plan__profile-pic"
+                                        src="media/79747.png"
+                                        alt=""
+                                    />
+                                    <div class="plan__profile-info">
+                                        <h3 class="plan__name">
+                                            Thomas de Jong
+                                        </h3>
+                                        <span class="badge badge--secondary"
+                                            >CEO</span
+                                        >
+                                        <span class="badge badge--accent"
+                                            >CS50</span
+                                        >
+                                    </div>
+                                </div>
+                                <blockquote class="plan__quote">
+                                    <p class="plan__quote-text">
+                                        He's no thief of his own wallet
+                                    </p>
+                                </blockquote>
+                            </header>
+                            <div class="card__body">
+                                <ul class="list list--tick">
+                                    <li class="list__item">Item 1</li>
+                                    <li class="list__item">Item 2</li>
+                                    <li class="list__item">Item 3</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plan">
+                        <div class="card card--secondary">
+                            <header class="card__header plan__header">
+                                <div class="plan__profile">
+                                    <img
+                                        class="plan__profile-pic"
+                                        src="media/79747.png"
+                                        alt=""
+                                    />
+                                    <div class="plan__profile-info">
+                                        <h3 class="plan__name">Sam Vlessing</h3>
+                                        <span class="badge badge--secondary"
+                                            >CEO</span
+                                        >
+                                        <span class="badge badge--accent"
+                                            >CS50</span
+                                        >
+                                    </div>
+                                </div>
+                                <blockquote class="plan__quote">
+                                    <p class="plan__quote-text">
+                                        Het kan niet altijd feest zijn
+                                    </p>
+                                </blockquote>
+                            </header>
+                            <div class="card__body">
+                                <ul class="list list--tick">
+                                    <li class="list__item">Item 1</li>
+                                    <li class="list__item">Item 2</li>
+                                    <li class="list__item">Item 3</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plan">
+                        <div class="card card--primary">
+                            <header class="card__header plan__header">
+                                <div class="plan__profile">
+                                    <img
+                                        class="plan__profile-pic"
+                                        src="media/79747.png"
+                                        alt=""
+                                    />
+                                    <div class="plan__profile-info">
+                                        <h3 class="plan__name">Emma</h3>
+                                        <span class="badge badge--secondary"
+                                            >Prinses</span
+                                        >
+                                        <span class="badge badge--accent"
+                                            >Poes</span
+                                        >
+                                    </div>
+                                </div>
+                                <blockquote class="plan__quote">
+                                    <p class="plan__quote-text">
+                                        Leeft voor de onderbroeken
+                                    </p>
+                                </blockquote>
+                            </header>
+                            <div class="card__body">
+                                <ul class="list list--tick">
+                                    <li class="list__item">Item 1</li>
+                                    <li class="list__item">Item 2</li>
+                                    <li class="list__item">Item 3</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <div class="footer__container">
+                <div class="grid grid--cols-4">
+                    <div class="footer__content">
+                        <h2 class="footer__heading">Projects</h2>
+                        <ul class="list list--tick">
+                            <li class="list__item">
+                                <a href="projects.html#project_1">Project #1</a>
+                            </li>
+                            <li class="list__item">
+                                <a href="projects.html#project_2">Project #2</a>
+                            </li>
+                            <li class="list__item">
+                                <a href="projects.html#project_3">Project #3</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer__content">
+                        <h2 class="footer__heading">Sitemap</h2>
+                        <ul class="list list--tick">
+                            <li class="list__item">
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="list__item">
+                                <a href="projects.html">Projects</a>
+                            </li>
+                            <li class="list__item">
+                                <a href="about.html">About</a>
+                            </li>
+                            <li class="list__item">
+                                <a href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer__content">
+                        <h2 class="footer__heading">The Project Institute</h2>
+                        <ul class="list list--tick">
+                            <li class="list__item">Science Park 610</li>
+                            <li class="list__item">1098XH Amsterdam</li>
+                            <li class="list__item">The Netherlands</li>
+                        </ul>
+                    </div>
+                    <div class="footer__content">
+                        <h2 class="footer__heading">Made possibe by:</h2>
+                        <ul class="list list--tick">
+                            <li class="list__item">Coding with Mosh</li>
+                            <li class="list__item">Bootstrap</li>
+                            <li class="list__item">Font Awesome</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="script.js" defer></script>
+    </body>
+</html>
